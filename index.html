@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang = "ja">
+
+<head>
+    <meta charset = "UTF-8">
+    <title>カエル旅行チェッカー</title>
+    <link rel = "stylesheet" href = "style.css">
+    <script src = "app.js" defer></script>
+</head>
+
+<body>
+    <h1>🐸 カエルの旅行先チェッカー 🐸</h1>
+
+    <section>
+        <h2>記録の追加</h2>
+        <label>
+            都道府県：
+            <select id = "pref-select"></select>
+        </label>
+        <br>
+        <label>
+            日付：
+            <input type = "date" id = "visit-date">
+        </label>
+        <br>
+        <button id = "add-btn">記録</button>
+    </section>
+
+    <section>
+        <h2>訪問履歴</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>都道府県</th>
+                    <th>日付</th>
+                </tr>
+            </thead>
+        </table>
+        <tbody id = "visit-table-body">
+
+        </tbody>
+    </section>
+</body>
+
+</html>
