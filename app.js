@@ -18,4 +18,12 @@ const prefs = [
     const visitTbody   = document.getElementById("visit-table-body");
     const frogTbody    = document.getElementById("frog-stats-body");
     const frogRec      = document.getElementById("frog-rec");
+
+
+    prefs.forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        prefSelect.appendChild(opt);
+    });
   });
