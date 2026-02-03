@@ -21,9 +21,25 @@ const prefs = [
 
 
     prefs.forEach(p => {
-        const opt = document.createElement("option");
-        opt.value = p;
-        opt.textContent = p;
-        prefSelect.appendChild(opt);
+      const opt = document.createElement("option");
+      opt.value = p;
+      opt.textContent = p;
+      prefSelect.appendChild(opt);
     });
+
+    //表に都道府県と日付を追加
+    addBtn.addEventListener("click", () => {
+      const pref = prefSelect.value;
+      const date = visitDate.value;
+
+      if(!pref || !date) {
+        alert("都道府県または日付が入力されていません");
+        return;
+      };
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = '<td>${pref}</td><td>${date}</td>';
+      visitTbody.appendChild(tr);
+    });
+
   });
