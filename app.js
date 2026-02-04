@@ -38,7 +38,7 @@ const prefs = [
       };
 
       const tr = document.createElement("tr");
-      tr.innerHTML = '<td>${pref}</td><td>${date}</td>';
+      tr.innerHTML = `<td>${pref}</td><td>${date}</td>`;
       visitTbody.appendChild(tr);
     });
 
