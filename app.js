@@ -40,6 +40,17 @@ const prefs = [
       const tr = document.createElement("tr");
       tr.innerHTML = `<td>${pref}</td><td>${date}</td>`;
       visitTbody.appendChild(tr);
+
+      const logs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      logs.push({pref, date});
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+      
+      const saved_logs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      saved_logs.forEACH(({pref, date}) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${pref}</td><td>${date}<\td>`;
+        visitTbody.appendChild(tr);
+      });
     });
 
   });
