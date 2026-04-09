@@ -30,14 +30,12 @@ const prefs = [
 
     function addRow(pref, date, index) {
       const tr = document.createElement("tr");
-
-      const deleteCell = editMode
-        ? `<td><button class="delete-btn" data-index="${index}">削除</button></td>` : "";
-
       tr.innerHTML = `
         <td>${pref}</td>
         <td>${date}</td>
-        ${deleteCell}
+        <td>
+          <button class="delete-btn" data-index="${index}" style="display: ${editMode ? 'inline' : 'none'};">削除</button>
+        </td>
       `;
       visitTbody.appendChild(tr);
     } 
