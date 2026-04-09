@@ -10,6 +10,7 @@ const prefs = [
   ];
 
   const STORAGE_KEY = "frog_travel_logs";
+  let editMode = false;
 
   document.addEventListener("DOMContentLoaded", () => {
     const prefSelect   = document.getElementById("pref-select");
@@ -27,11 +28,21 @@ const prefs = [
       prefSelect.appendChild(opt);
     });
 
-    const savedLogs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    savedLogs.forEach(({pref, date}) => {
+    function addRow(pref, date, index) {
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${pref}</td><td>${date}</td>`;
+      tr.innerHTML = `
+        <td>${pref}</td>
+        <td>${date}</td>
+        <td>
+          <button class="delete-btn" data-index="${index}" style="display: ${editMode ? 'inline' : 'none'};">削除</button>
+        </td>
+      `;
       visitTbody.appendChild(tr);
+    } 
+
+    const savedLogs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    savedLogs.forEach(({pref, date}, index) => {
+      addRow(pref, date, index);
     });
 
     //表に都道府県と日付を追加
@@ -44,13 +55,42 @@ const prefs = [
         return;
       };
 
-      const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${pref}</td><td>${date}</td>`;
-      visitTbody.appendChild(tr);
+      //const tr = document.createElement("tr");
+      //tr.innerHTML = `<td>${pref}</td><td>${date}</td>`;
+      //visitTbody.appendChild(tr);
 
       const logs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
       logs.push({pref, date});
       localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+
+      addRow(pref, date, logs.length - 1);
+
+      prefSelect.value = "";
+      visitDate.value = "";
     });
 
+    //編集モード
+    const editBtn = document.getElementById("edit-mode");
+    editBtn.addEventListener("click", () => {
+      editMode = !editMode;
+      editBtn.textContent = editMode ? "編集モードを終了する" : "編集";
+
+      document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.style.display = editMode ? "inline" : "none";
+      })
+    })
+
+    //削除モード
+    visitTbody.addEventListener("click", (e) => {
+      if (e.target.classList.contains("delete-btn")) {
+        const index = parseInt(e.target.dataset.index);
+        const logs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    
+        logs.splice(index, 1);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    
+        location.reload();
+      }
+    });
+    
   });
