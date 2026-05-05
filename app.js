@@ -12,7 +12,7 @@ const prefs = [
   const STORAGE_KEY = "frog_travel_logs";
   let editMode = false;
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async() => {
     const prefSelect   = document.getElementById("pref-select");
     const visitDate    = document.getElementById("visit-date");
     const addBtn       = document.getElementById("add-btn");
@@ -66,6 +66,7 @@ const prefs = [
       addRow(pref, date, logs.length - 1);
 
       updateFrogStats();
+      updateMapColors();
 
       prefSelect.value = "";
       visitDate.value = "";
@@ -130,5 +131,33 @@ const prefs = [
     }
 
     updateFrogStats();
+
+    const map = "./map-full.svg";
+    const container = document.querySelector('#map');
+  
+    const res = await fetch(map);
+    if (res.ok) {
+      const svg = await res.text();
+      container.innerHTML = svg;
+  
+      updateMapColors();
+    }
+
+    async function updateMapColors() {
+      const logs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const counts = countVisits(logs);
+    
+      prefs.forEach(pref => {
+        const path = document.querySelector(`[data-name="${pref}"]`);
+        if (!path) return;
+    
+        if (counts[pref]) {
+          path.style.fill = "#4CAF50"; // 訪問済み
+        } else {
+          path.style.fill = "#ccc"; // 未訪問
+        }
+      });
+    }
+    
     
   });
