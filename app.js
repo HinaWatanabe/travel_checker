@@ -65,6 +65,8 @@ const prefs = [
 
       addRow(pref, date, logs.length - 1);
 
+      updateFrogStats();
+
       prefSelect.value = "";
       visitDate.value = "";
     });
@@ -92,5 +94,41 @@ const prefs = [
         location.reload();
       }
     });
+
+    function countVisits(logs){
+      const counts = {};
+      logs.forEach(({pref}) => {
+        counts[pref] = (counts[pref]  || 0) +1;
+      });
+      return counts;
+    }
+
+    function getFrogStage(count) {
+      if (count === 0) return "🥚";
+      if (count === 1) return "🐣"; // おたまじゃくし代用
+      return "🐸";
+    }
+
+    function updateFrogStats() {
+      const logs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      const counts = countVisits(logs);
+    
+      frogTbody.innerHTML = "";
+    
+      prefs.forEach(pref => {
+        const count = counts[pref] || 0;
+        const stage = getFrogStage(count);
+    
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${pref}</td>
+          <td>${count} 回</td>
+          <td>${stage}</td>
+        `;
+        frogTbody.appendChild(tr);
+      });
+    }
+
+    updateFrogStats();
     
   });
