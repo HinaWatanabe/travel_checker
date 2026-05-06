@@ -220,6 +220,6 @@ document.addEventListener("DOMContentLoaded", async() => {
   const todaySpot = frogSpots[index];
 
   document.getElementById("frog-rec").textContent =
-    `${todaySpot.pref}：${todaySpot.name}：${todaySpot.adress}`;
+    `${todaySpot.pref}：${todaySpot.name}：${todaySpot.address}`;
 
 });
