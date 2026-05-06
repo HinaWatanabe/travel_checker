@@ -209,5 +209,17 @@ document.addEventListener("DOMContentLoaded", async() => {
       }
     });
   }
+
+  const today = new Date().toDateString();
+  let seed = 0;
+  for (let i = 0; i < today.length; i++) {
+    seed += today.charCodeAt(i);
+  }
   
+  const index = seed % frogSpots.length;
+  const todaySpot = frogSpots[index];
+
+  document.getElementById("frog-rec").textContent =
+    `${todaySpot.pref}：${todaySpot.name}：${todaySpot.adress}`;
+
 });
