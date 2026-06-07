@@ -3,6 +3,10 @@
 47都道府県の訪問記録を管理し、旅をするたびにカエルが成長していくWebアプリです。
 
 
+## デモサイト
+https://hinawatanabe.github.io/travel_checker/
+
+
 ## 制作背景
 
 旅行が好きで全国47都道府県制覇を目指しているため、
@@ -26,7 +30,6 @@
 | 技術 | 用途 |
 |------|------|
 | HTML | 画面構造 |
-| CSS | レイアウト・デザイン |
 | JavaScript | データ管理・DOM操作 |
 | LocalStorage | データ永続化 |
 | SVG Map | 日本地図の表示 |
@@ -52,5 +55,5 @@
 日本地図のSVGは以下の素材を使用しています。
 
 - 日本地図SVG
-  - 出典 : Geolonia / japanese-prefectures
-  - https://github.com/geolonia/japanese-prefectures
+  
+  出典 : [Geolonia / japanese-prefectures](https://github.com/geolonia/japanese-prefectures)
