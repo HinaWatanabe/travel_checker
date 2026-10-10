@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 
     updateFrogStats();
     updateMapColors();
+    updateVisitedCount();
 
     prefSelect.value = "";
     visitDate.value = "";
@@ -181,6 +182,7 @@ document.addEventListener("DOMContentLoaded", async() => {
   }
 
   updateFrogStats();
+  updateVisitedCount();
 
   const map = "./map-full.svg";
   const container = document.querySelector('#map');
@@ -221,5 +223,15 @@ document.addEventListener("DOMContentLoaded", async() => {
 
   document.getElementById("frog-rec").textContent =
     `${todaySpot.pref}：${todaySpot.name}：${todaySpot.address}`;
+
+  //訪問カウント
+  function updateVisitedCount() {
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    const visitedPrefs = new Set(logs.map(log => log.pref));
+
+    document.getElementById("visited-count").textContent =
+        `${visitedPrefs.size}/${prefs.length}`;
+  }
 
 });
