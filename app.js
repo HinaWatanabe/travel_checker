@@ -91,9 +91,13 @@ document.addEventListener("DOMContentLoaded", async() => {
   } 
 
   const savedLogs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  savedLogs.forEach(({pref, date}, index) => {
-    addRow(pref, date, index);
-  });
+  savedLogs
+      .map((log, index) => ({...log, index}))
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .slice(0, 5)
+      .forEach(({pref, date, index}) => {
+          addRow(pref, date, index);
+      });
 
   //表に都道府県と日付を追加
   addBtn.addEventListener("click", () => {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>訪問履歴一覧 | カエル旅行チェッカー</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .history-controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin:16px 0; }
+    .history-controls button { cursor:pointer; }
+    .history-controls button:disabled { cursor:default; opacity:.45; }
+    .history-table { width:100%; border-collapse:collapse; }
+    .history-table th, .history-table td { border:1px solid #ccc; padding:10px; text-align:left; }
+    .history-table th { background:#e8f5e9; }
+    .history-table .delete-btn { color:#b71c1c; }
+  </style>
+  <script src="history.js" defer></script>
+</head>
+<body>
+  <h1>🐸 すべての訪問履歴</h1>
+  <p><a href="index.html">← トップページに戻る</a></p>
+  <section>
+    <h2>訪問履歴一覧</h2>
+    <p id="history-total"></p>
+    <table class="history-table">
+      <thead><tr><th>都道府県</th><th>日付</th><th>操作</th></tr></thead>
+      <tbody id="history-table-body"></tbody>
+    </table>
+    <div class="history-controls">
+      <button id="prev-page" type="button">← 前へ</button>
+      <span id="page-info"></span>
+      <button id="next-page" type="button">次へ →</button>
+    </div>
+  </section>
+</body>
+</html>
